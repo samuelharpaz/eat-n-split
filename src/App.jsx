@@ -37,11 +37,15 @@ export default function App() {
     setShowAddFriend(show => !show);
   };
 
+  const handleAddFriend = function (newFriend) {
+    setFriends(friends => [...friends, newFriend]);
+  };
+
   return (
     <div className="app">
       <div className="sidebar">
         <FriendsList friends={friends} />
-        {showAddFriend && <FormAddFriend onAddFriend={setFriends} />}
+        {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
         <Button onClick={handleToggleAddFriend}>{showAddFriend ? 'Close' : 'Add friend'}</Button>
       </div>
       <FormSplitBill />
@@ -98,9 +102,7 @@ function FormAddFriend({ onAddFriend }) {
       balance: 0
     };
 
-    console.log(newFriend);
-
-    onAddFriend(friends => [...friends, newFriend]);
+    onAddFriend(newFriend);
 
     setName('');
     setImage('https://i.pravatar.cc/48');
